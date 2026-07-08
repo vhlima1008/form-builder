@@ -3,10 +3,10 @@ import { Outlet } from "react-router-dom"
 
 export function AuthLayout() {
   return (
-    <main className="flex min-h-svh items-center justify-center bg-muted/40 px-4 py-8">
+    <main className="flex min-h-svh items-center justify-center bg-background px-4 py-8">
       <div className="w-full max-w-md">
         <div className="mb-8 flex flex-col items-center gap-3 text-center">
-          <div className="flex size-11 items-center justify-center rounded-xl border bg-background shadow-sm">
+          <div className="flex size-11 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-xs">
             <FileText className="size-5" aria-hidden="true" />
           </div>
           <div>

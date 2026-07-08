@@ -1,4 +1,5 @@
-import type { ReactNode } from "react"
+import { Loader2 } from "lucide-react"
+import { useState, type ReactNode } from "react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -22,11 +23,25 @@ export function ConfirmDeleteDialog({
   title: string
   description: string
   isDeleting?: boolean
-  onConfirm: () => void
+  onConfirm: () => void | Promise<void>
   trigger: ReactNode
 }) {
+  const [open, setOpen] = useState(false)
+  const [isConfirming, setIsConfirming] = useState(false)
+  const isBusy = Boolean(isDeleting || isConfirming)
+
+  async function handleConfirm() {
+    setIsConfirming(true)
+    try {
+      await onConfirm()
+      setOpen(false)
+    } finally {
+      setIsConfirming(false)
+    }
+  }
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -35,17 +50,20 @@ export function ConfirmDeleteDialog({
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline" type="button">
+            <Button disabled={isBusy} variant="outline" type="button">
               Cancelar
             </Button>
           </DialogClose>
           <Button
-            disabled={isDeleting}
+            disabled={isBusy}
             variant="destructive"
             type="button"
-            onClick={onConfirm}
+            onClick={handleConfirm}
           >
-            Excluir
+            {isBusy ? (
+              <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+            ) : null}
+            {isBusy ? "Excluindo…" : "Excluir"}
           </Button>
         </DialogFooter>
       </DialogContent>

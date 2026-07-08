@@ -17,9 +17,6 @@ export const formService = {
     return response.data
   },
 
-  // Consulta dados de uma tabela específica (SELECT + WHERE): pesquisa
-  // formulários do usuário autenticado por título e, opcionalmente,
-  // por status de publicação.
   async searchForms(params: { title?: string; published?: boolean }) {
     const response = await api.get<Form[]>("/forms/search", { params })
     return response.data

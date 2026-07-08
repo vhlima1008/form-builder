@@ -1,5 +1,5 @@
 import { Search, X } from "lucide-react"
-import { useState, type FormEvent } from "react"
+import type { FormEvent } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -17,48 +17,53 @@ export type FormSearchFilters = {
 }
 
 export function FormSearchBar({
-  onSearch,
+  filters,
+  onChange,
   onClear,
-  isSearching,
 }: {
-  onSearch: (filters: FormSearchFilters) => void
+  filters: FormSearchFilters
+  onChange: (filters: FormSearchFilters) => void
   onClear: () => void
-  isSearching?: boolean
 }) {
-  const [title, setTitle] = useState("")
-  const [status, setStatus] = useState<"all" | "published" | "draft">("all")
+  const status =
+    filters.published === undefined
+      ? "all"
+      : filters.published
+        ? "published"
+        : "draft"
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault()
-    onSearch({
-      title,
-      published:
-        status === "all" ? undefined : status === "published",
-    })
   }
 
   function handleClear() {
-    setTitle("")
-    setStatus("all")
     onClear()
   }
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-3 rounded-xl border bg-card/70 p-4 sm:flex-row sm:items-center"
+      className="flex flex-col gap-3 rounded-2xl border bg-card p-4 shadow-xs sm:flex-row sm:items-center"
     >
       <div className="flex-1">
         <Input
           placeholder="Pesquisar por título…"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
+          value={filters.title}
+          onChange={(event) =>
+            onChange({ ...filters, title: event.target.value })
+          }
           aria-label="Pesquisar formulários por título"
         />
       </div>
       <Select
         value={status}
-        onValueChange={(value) => setStatus(value as typeof status)}
+        onValueChange={(value) =>
+          onChange({
+            ...filters,
+            published:
+              value === "all" ? undefined : value === "published",
+          })
+        }
       >
         <SelectTrigger className="w-full sm:w-40">
           <SelectValue placeholder="Status" />
@@ -70,9 +75,9 @@ export function FormSearchBar({
         </SelectContent>
       </Select>
       <div className="flex gap-2">
-        <Button type="submit" disabled={isSearching}>
+        <Button type="submit" variant="secondary">
           <Search className="size-4" aria-hidden="true" />
-          Pesquisar
+          Filtrar
         </Button>
         <Button type="button" variant="ghost" onClick={handleClear}>
           <X className="size-4" aria-hidden="true" />

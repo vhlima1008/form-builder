@@ -9,7 +9,7 @@ export function PublicFormSubmittedPage() {
 
   return (
     <div className="mx-auto flex min-h-[calc(100svh-3rem)] max-w-xl items-center">
-      <Card className="w-full bg-background shadow-sm">
+      <Card className="w-full bg-card shadow-xs">
         <CardContent className="grid justify-items-center gap-5 p-8 text-center">
           <div className="flex size-14 items-center justify-center rounded-full bg-green-50 text-green-700">
             <CheckCircle2 className="size-8" aria-hidden="true" />

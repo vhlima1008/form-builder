@@ -16,7 +16,9 @@ import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
   Dialog,
+  DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -51,6 +53,10 @@ import type { Question } from "@/types/question"
 import type { Section } from "@/types/section"
 
 type DialogMode = "create" | "edit"
+type DeleteTarget =
+  | { type: "section"; section: Section }
+  | { type: "question"; question: Question }
+  | { type: "option"; option: QuestionOption }
 
 export function FormBuilderPage() {
   const { formId } = useParams()
@@ -69,6 +75,8 @@ export function FormBuilderPage() {
     question: Question
     option?: QuestionOption
   } | null>(null)
+  const [deleteTarget, setDeleteTarget] = useState<DeleteTarget | null>(null)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   async function togglePublish() {
     if (!form) return
@@ -86,36 +94,26 @@ export function FormBuilderPage() {
     }
   }
 
-  async function deleteSection(section: Section) {
-    if (!window.confirm("Excluir esta seção?")) return
+  async function confirmDelete() {
+    if (!deleteTarget) return
+    setIsDeleting(true)
     try {
-      await sectionService.deleteSection(section.id)
-      toast.success("Seção excluída.")
+      if (deleteTarget.type === "section") {
+        await sectionService.deleteSection(deleteTarget.section.id)
+        toast.success("Seção excluída.")
+      } else if (deleteTarget.type === "question") {
+        await questionService.deleteQuestion(deleteTarget.question.id)
+        toast.success("Pergunta excluída.")
+      } else {
+        await questionOptionService.deleteOption(deleteTarget.option.id)
+        toast.success("Opção excluída.")
+      }
+      setDeleteTarget(null)
       await loadForm()
     } catch (requestError) {
       toast.error(getApiErrorMessage(requestError))
-    }
-  }
-
-  async function deleteQuestion(question: Question) {
-    if (!window.confirm("Excluir esta pergunta?")) return
-    try {
-      await questionService.deleteQuestion(question.id)
-      toast.success("Pergunta excluída.")
-      await loadForm()
-    } catch (requestError) {
-      toast.error(getApiErrorMessage(requestError))
-    }
-  }
-
-  async function deleteOption(option: QuestionOption) {
-    if (!window.confirm("Excluir esta opção?")) return
-    try {
-      await questionOptionService.deleteOption(option.id)
-      toast.success("Opção excluída.")
-      await loadForm()
-    } catch (requestError) {
-      toast.error(getApiErrorMessage(requestError))
+    } finally {
+      setIsDeleting(false)
     }
   }
 
@@ -224,21 +222,27 @@ export function FormBuilderPage() {
               onEditSection={(selectedSection) =>
                 setSectionDialog({ mode: "edit", section: selectedSection })
               }
-              onDeleteSection={deleteSection}
+              onDeleteSection={(section) =>
+                setDeleteTarget({ type: "section", section })
+              }
               onAddQuestion={(selectedSection) =>
                 setQuestionDialog({ mode: "create", section: selectedSection })
               }
               onEditQuestion={(question) =>
                 setQuestionDialog({ mode: "edit", question })
               }
-              onDeleteQuestion={deleteQuestion}
+              onDeleteQuestion={(question) =>
+                setDeleteTarget({ type: "question", question })
+              }
               onAddOption={(question) =>
                 setOptionDialog({ mode: "create", question })
               }
               onEditOption={(option, question) =>
                 setOptionDialog({ mode: "edit", option, question })
               }
-              onDeleteOption={deleteOption}
+              onDeleteOption={(option) =>
+                setDeleteTarget({ type: "option", option })
+              }
             />
           ))
         )}
@@ -261,7 +265,70 @@ export function FormBuilderPage() {
         onOpenChange={(open) => (open ? null : setOptionDialog(null))}
         onSaved={loadForm}
       />
+      <DeleteContentDialog
+        target={deleteTarget}
+        isDeleting={isDeleting}
+        onOpenChange={(open) => {
+          if (!open) setDeleteTarget(null)
+        }}
+        onConfirm={confirmDelete}
+      />
     </div>
+  )
+}
+
+function DeleteContentDialog({
+  target,
+  isDeleting,
+  onOpenChange,
+  onConfirm,
+}: {
+  target: DeleteTarget | null
+  isDeleting: boolean
+  onOpenChange: (open: boolean) => void
+  onConfirm: () => void
+}) {
+  const label =
+    target?.type === "section"
+      ? "Excluir seção?"
+      : target?.type === "question"
+        ? "Excluir pergunta?"
+        : "Excluir opção?"
+
+  const description =
+    target?.type === "section"
+      ? "A seção e suas perguntas serão removidas do formulário."
+      : target?.type === "question"
+        ? "A pergunta será removida do formulário e deixará de aparecer para respondentes."
+        : "A opção será removida desta pergunta."
+
+  return (
+    <Dialog open={Boolean(target)} onOpenChange={onOpenChange}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{label}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button disabled={isDeleting} variant="outline" type="button">
+              Cancelar
+            </Button>
+          </DialogClose>
+          <Button
+            disabled={isDeleting}
+            variant="destructive"
+            type="button"
+            onClick={onConfirm}
+          >
+            {isDeleting ? (
+              <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+            ) : null}
+            {isDeleting ? "Excluindo…" : "Excluir"}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }
 

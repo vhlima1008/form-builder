@@ -77,20 +77,6 @@ public class FormService {
     }
 
     @Transactional(readOnly = true)
-    public List<FormResponseDTO> searchUserForms(String title, Boolean published) {
-        User currentUser = authService.getCurrentUser();
-        String filterTitle = title == null ? "" : title;
-        List<Form> forms = published == null
-            ? formRepository.findByOwnerIdAndTitleContainingIgnoreCase(currentUser.getId(), filterTitle)
-            : formRepository.findByOwnerIdAndTitleContainingIgnoreCaseAndPublished(
-                currentUser.getId(),
-                filterTitle,
-                published
-            );
-        return forms.stream().map(dtoMapper::toFormResponseDTO).toList();
-    }
-
-    @Transactional(readOnly = true)
     public FormDetailsResponse getFormById(UUID formId) {
         Form form = getOwnedForm(formId);
         return dtoMapper.toFormDetailsResponse(form);

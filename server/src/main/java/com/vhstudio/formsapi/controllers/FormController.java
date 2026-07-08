@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vhstudio.formsapi.services.FormService;
+import com.vhstudio.formsapi.services.SearchService;
 import com.vhstudio.formsapi.utils.dtos.CreateFormRequest;
 import com.vhstudio.formsapi.utils.dtos.FormDetailsResponse;
 import com.vhstudio.formsapi.utils.dtos.FormResponseDTO;
@@ -28,9 +29,11 @@ import jakarta.validation.Valid;
 @RequestMapping("/forms")
 public class FormController {
     private final FormService formService;
+    private final SearchService searchService;
 
-    public FormController(FormService formService) {
+    public FormController(FormService formService, SearchService searchService) {
         this.formService = formService;
+        this.searchService = searchService;
     }
 
     @PostMapping
@@ -48,7 +51,7 @@ public class FormController {
         @RequestParam(required = false, defaultValue = "") String title,
         @RequestParam(required = false) Boolean published
     ) {
-        return ResponseEntity.ok(formService.searchUserForms(title, published));
+        return ResponseEntity.ok(searchService.listForms(title, published));
     }
 
     @GetMapping("/{formId}")

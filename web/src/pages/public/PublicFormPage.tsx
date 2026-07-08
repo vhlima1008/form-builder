@@ -52,13 +52,6 @@ export function PublicFormPage() {
     hasStartedResponse.current = true
     setIsCreatingResponse(true)
     try {
-      if (import.meta.env.DEV) {
-        console.debug(
-          "[PublicForm] Creating response:",
-          `POST /public/forms/${publicSlug}/responses`
-        )
-      }
-
       const response = await publicFormService.createFormResponse(publicSlug)
 
       if (!response.responseId || !response.accessToken) {
@@ -70,10 +63,6 @@ export function PublicFormPage() {
       const nextSession = {
         responseId: response.responseId,
         accessToken: response.accessToken,
-      }
-
-      if (import.meta.env.DEV) {
-        console.debug("[PublicForm] Response session created:", nextSession)
       }
 
       setResponseSession(nextSession)
@@ -134,14 +123,6 @@ export function PublicFormPage() {
         answers: buildSubmitAnswers(),
       }
 
-      if (import.meta.env.DEV) {
-        console.debug(
-          "[PublicForm] Submitting response:",
-          `POST /public/responses/${session.responseId}/submit`,
-          payload
-        )
-      }
-
       await publicFormService.submitFormResponse(session.responseId, payload)
       navigate(`/forms/public/${publicSlug}/submitted`)
     } catch (requestError) {
@@ -171,7 +152,7 @@ export function PublicFormPage() {
 
   return (
     <div className="mx-auto grid max-w-3xl gap-5 pb-8">
-      <Card className="overflow-hidden border-t-4 border-t-primary bg-background shadow-sm">
+      <Card className="overflow-hidden border-t-4 border-t-primary bg-card shadow-xs">
         <CardHeader className="space-y-3">
           <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
             Formulário público
@@ -188,7 +169,7 @@ export function PublicFormPage() {
       </Card>
 
       {sortByPosition(form.sections).map((section, sectionIndex) => (
-        <Card key={section.id} className="bg-background shadow-sm">
+        <Card key={section.id} className="bg-card shadow-xs">
           <CardHeader>
             <p className="text-xs font-medium text-muted-foreground">
               Seção {sectionIndex + 1}
@@ -204,7 +185,7 @@ export function PublicFormPage() {
             {sortByPosition(section.questions).map((question) => (
               <div
                 key={question.id}
-                className="grid gap-3 rounded-xl border bg-card p-4"
+                className="grid gap-3 rounded-2xl border bg-background p-4"
               >
                 <div>
                   <h2 className="font-medium break-words">

@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react"
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 
 import { EmptyState } from "@/components/common/EmptyState"
@@ -13,39 +13,33 @@ import {
 } from "@/components/forms/FormSearchBar"
 import { Button } from "@/components/ui/button"
 import { useForms } from "@/hooks/useForms"
-import { formService } from "@/services/form-service"
-import type { Form } from "@/types/form"
 
 export function FormsPage() {
   const { forms, isLoading, error, loadForms } = useForms()
 
-  const [searchResults, setSearchResults] = useState<Form[] | null>(null)
-  const [isSearching, setIsSearching] = useState(false)
-  const [searchError, setSearchError] = useState<unknown>(null)
-  const [lastFilters, setLastFilters] = useState<FormSearchFilters | null>(null)
+  const [filters, setFilters] = useState<FormSearchFilters>({
+    title: "",
+    published: undefined,
+  })
 
-  async function handleSearch(filters: FormSearchFilters) {
-    setIsSearching(true)
-    setSearchError(null)
-    setLastFilters(filters)
-    try {
-      const results = await formService.searchForms(filters)
-      setSearchResults(results)
-    } catch (requestError) {
-      setSearchError(requestError)
-    } finally {
-      setIsSearching(false)
-    }
-  }
+  const visibleForms = useMemo(() => {
+    const normalizedTitle = filters.title.trim().toLowerCase()
+    return forms.filter((form) => {
+      const matchesTitle =
+        normalizedTitle.length === 0 ||
+        form.title.toLowerCase().includes(normalizedTitle)
+      const matchesStatus =
+        filters.published === undefined || form.published === filters.published
+      return matchesTitle && matchesStatus
+    })
+  }, [filters.published, filters.title, forms])
+
+  const isFiltering =
+    filters.title.trim().length > 0 || filters.published !== undefined
 
   function handleClearSearch() {
-    setSearchResults(null)
-    setSearchError(null)
-    setLastFilters(null)
+    setFilters({ title: "", published: undefined })
   }
-
-  const isShowingSearch = searchResults !== null
-  const visibleForms = isShowingSearch ? searchResults : forms
 
   return (
     <div className="grid gap-6">
@@ -63,35 +57,31 @@ export function FormsPage() {
       />
 
       <FormSearchBar
-        onSearch={handleSearch}
+        filters={filters}
+        onChange={setFilters}
         onClear={handleClearSearch}
-        isSearching={isSearching}
       />
 
-      {isShowingSearch ? (
+      {isFiltering ? (
         <p className="text-sm text-muted-foreground">
-          {searchResults.length} formulário{searchResults.length === 1 ? "" : "s"}{" "}
-          encontrado{searchResults.length === 1 ? "" : "s"} para a pesquisa.
+          {visibleForms.length} formulário{visibleForms.length === 1 ? "" : "s"}{" "}
+          encontrado{visibleForms.length === 1 ? "" : "s"} para a pesquisa.
         </p>
       ) : null}
 
-      {isSearching ? <LoadingState label="Pesquisando formulários…" /> : null}
-      {searchError ? <ErrorState error={searchError} /> : null}
-      {!isShowingSearch && isLoading ? (
-        <LoadingState label="Carregando formulários…" />
-      ) : null}
-      {!isShowingSearch && error ? <ErrorState error={error} /> : null}
+      {isLoading ? <LoadingState label="Carregando formulários…" /> : null}
+      {error ? <ErrorState error={error} /> : null}
 
-      {!isSearching && !searchError && !isLoading && !error && visibleForms.length === 0 ? (
+      {!isLoading && !error && visibleForms.length === 0 ? (
         <EmptyState
           title="Nenhum formulário encontrado"
           description={
-            isShowingSearch
+            isFiltering
               ? "Ajuste os filtros de pesquisa e tente novamente."
               : "Crie um formulário para organizar perguntas em seções e receber respostas."
           }
           action={
-            isShowingSearch ? undefined : (
+            isFiltering ? undefined : (
               <Button asChild>
                 <Link to="/forms/new">Criar formulário</Link>
               </Button>
@@ -100,17 +90,13 @@ export function FormsPage() {
         />
       ) : null}
 
-      {!isSearching && !searchError && !isLoading && !error && visibleForms.length > 0 ? (
+      {!isLoading && !error && visibleForms.length > 0 ? (
         <div className="grid gap-4 md:grid-cols-2">
           {visibleForms.map((form) => (
             <FormCard
               key={form.id}
               form={form}
-              onChanged={
-                isShowingSearch && lastFilters
-                  ? () => handleSearch(lastFilters)
-                  : loadForms
-              }
+              onChanged={loadForms}
             />
           ))}
         </div>

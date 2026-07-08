@@ -5,21 +5,23 @@ export function EmptyState({
   title,
   description,
   action,
+  icon,
 }: {
   title: string
   description: string
   action?: ReactNode
+  icon?: ReactNode
 }) {
   return (
-    <div className="rounded-xl border border-dashed bg-card/70 p-8 text-center">
-      <div className="mx-auto mb-4 flex size-10 items-center justify-center rounded-full bg-muted">
-        <Inbox className="size-5 text-muted-foreground" aria-hidden="true" />
+    <div className="rounded-2xl border border-dashed bg-card/80 p-8 text-center shadow-xs">
+      <div className="mx-auto mb-4 flex size-10 items-center justify-center rounded-full bg-accent text-accent-foreground">
+        {icon ?? <Inbox className="size-5" aria-hidden="true" />}
       </div>
-      <h2 className="text-base font-medium text-pretty">{title}</h2>
+      <h2 className="text-base font-semibold text-pretty">{title}</h2>
       <p className="mx-auto mt-2 max-w-md text-sm text-pretty text-muted-foreground">
         {description}
       </p>
-      {action ? <div className="mt-4">{action}</div> : null}
+      {action ? <div className="mt-5">{action}</div> : null}
     </div>
   )
 }

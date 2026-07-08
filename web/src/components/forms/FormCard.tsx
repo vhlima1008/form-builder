@@ -1,9 +1,17 @@
-import { Calendar, Edit, Eye, FileBarChart, Trash2 } from "lucide-react"
+import {
+  Calendar,
+  Copy,
+  Edit,
+  Eye,
+  FileBarChart,
+  MoreHorizontal,
+  Trash2,
+} from "lucide-react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { toast } from "sonner"
 
-import { ConfirmDeleteDialog } from "@/components/common/ConfirmDeleteDialog"
-import { CopyPublicLinkButton } from "@/components/forms/CopyPublicLinkButton"
+import { getPublicFormLink } from "@/components/forms/CopyPublicLinkButton"
 import { FormStatusBadge } from "@/components/forms/FormStatusBadge"
 import { Button } from "@/components/ui/button"
 import {
@@ -13,6 +21,22 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { formatDate } from "@/lib/format"
 import { formService } from "@/services/form-service"
 import type { Form } from "@/types/form"
@@ -24,14 +48,27 @@ export function FormCard({
   form: Form
   onChanged: () => void
 }) {
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
+
   async function deleteForm() {
+    setIsDeleting(true)
     try {
       await formService.deleteForm(form.id)
       toast.success("Formulário excluído.")
+      setIsDeleteOpen(false)
       onChanged()
     } catch {
       toast.error("Não foi possível excluir o formulário.")
+    } finally {
+      setIsDeleting(false)
     }
+  }
+
+  async function copyPublicLink() {
+    if (!form.publicSlug) return
+    await navigator.clipboard.writeText(getPublicFormLink(form.publicSlug))
+    toast.success("Link copiado.")
   }
 
   async function togglePublish() {
@@ -50,7 +87,7 @@ export function FormCard({
   }
 
   return (
-    <Card className="group overflow-hidden bg-background shadow-sm transition-colors hover:border-foreground/20">
+    <Card className="group overflow-hidden bg-card shadow-xs transition-colors hover:ring-foreground/15">
       <CardHeader className="gap-3">
         <div className="flex items-start justify-between gap-3">
           <CardTitle className="line-clamp-2 min-w-0 text-base">
@@ -66,8 +103,9 @@ export function FormCard({
         <Calendar className="size-3.5" aria-hidden="true" />
         Atualizado em {formatDate(form.updatedAt || form.createdAt)}
       </CardContent>
-      <CardFooter className="flex flex-wrap gap-2 border-t bg-muted/20 p-4">
-        <Button asChild variant="outline" size="sm">
+      <CardFooter className="flex items-center justify-between gap-2 border-t bg-muted/20 p-3">
+        <div className="flex min-w-0 gap-2">
+        <Button asChild size="sm">
           <Link to={`/forms/${form.id}/builder`}>
             <Edit className="size-4" aria-hidden="true" />
             Editar
@@ -79,44 +117,76 @@ export function FormCard({
             Respostas
           </Link>
         </Button>
-        {form.published && form.publicSlug ? (
-          <>
-            <Button asChild variant="ghost" size="sm">
-              <a
-                href={`/forms/public/${form.publicSlug}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Eye className="size-4" aria-hidden="true" />
-                Visualizar
-              </a>
-            </Button>
-            <CopyPublicLinkButton
-              publicSlug={form.publicSlug}
+        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              aria-label={`Mais ações para ${form.title || "formulário"}`}
               variant="ghost"
-            />
-          </>
-        ) : null}
-        <Button
-          variant="secondary"
-          size="sm"
-          type="button"
-          onClick={togglePublish}
-        >
-          {form.published ? "Despublicar" : "Publicar"}
-        </Button>
-        <ConfirmDeleteDialog
-          title="Excluir formulário?"
-          description="Esta ação removerá o formulário e seus dados associados."
-          onConfirm={deleteForm}
-          trigger={
-            <Button variant="destructive" size="sm" type="button">
-              <Trash2 className="size-4" aria-hidden="true" />
-              Excluir
+              size="icon-sm"
+              type="button"
+            >
+              <MoreHorizontal className="size-4" aria-hidden="true" />
             </Button>
-          }
-        />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-52">
+            {form.published && form.publicSlug ? (
+              <>
+                <DropdownMenuItem asChild>
+                  <a
+                    href={`/forms/public/${form.publicSlug}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Eye className="size-4" aria-hidden="true" />
+                    Visualizar formulário
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={copyPublicLink}>
+                  <Copy className="size-4" aria-hidden="true" />
+                  Copiar link
+                </DropdownMenuItem>
+              </>
+            ) : null}
+            <DropdownMenuItem onSelect={togglePublish}>
+              {form.published ? "Despublicar" : "Publicar"}
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              variant="destructive"
+              onSelect={() => setIsDeleteOpen(true)}
+            >
+              <Trash2 className="size-4" aria-hidden="true" />
+              Excluir formulário
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </CardFooter>
+      <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Excluir formulário?</DialogTitle>
+            <DialogDescription>
+              Esta ação removerá o formulário e seus dados associados.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button disabled={isDeleting} variant="outline" type="button">
+                Cancelar
+              </Button>
+            </DialogClose>
+            <Button
+              disabled={isDeleting}
+              variant="destructive"
+              type="button"
+              onClick={deleteForm}
+            >
+              {isDeleting ? "Excluindo…" : "Excluir"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </Card>
   )
 }

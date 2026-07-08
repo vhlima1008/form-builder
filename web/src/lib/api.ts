@@ -29,8 +29,18 @@ api.interceptors.response.use(
 
 export function getApiErrorMessage(error: unknown) {
   if (axios.isAxiosError(error)) {
+    if (!error.response) {
+      return "Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente."
+    }
+
     const data = error.response?.data as { message?: string } | undefined
-    return data?.message || "Não foi possível concluir a operação."
+    if (data?.message) return data.message
+
+    if (error.response.status >= 500) {
+      return "O servidor não conseguiu concluir a operação. Tente novamente em instantes."
+    }
+
+    return "Não foi possível concluir a operação. Revise as informações e tente novamente."
   }
 
   return "Não foi possível concluir a operação."

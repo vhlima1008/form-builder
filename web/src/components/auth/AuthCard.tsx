@@ -20,9 +20,11 @@ export function AuthCard({
   footer: ReactNode
 }) {
   return (
-    <Card className="border bg-background shadow-sm">
+    <Card className="bg-card shadow-xs">
       <CardHeader className="space-y-2 text-center">
-        <CardTitle className="text-2xl tracking-tight">{title}</CardTitle>
+        <CardTitle className="text-2xl font-semibold tracking-tight">
+          {title}
+        </CardTitle>
         <CardDescription className="text-pretty">{description}</CardDescription>
       </CardHeader>
       <CardContent>

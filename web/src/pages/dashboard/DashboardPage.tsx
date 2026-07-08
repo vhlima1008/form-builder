@@ -1,4 +1,5 @@
 import { FileText, Plus } from "lucide-react"
+import { useMemo, type ReactNode } from "react"
 import { Link } from "react-router-dom"
 
 import { EmptyState } from "@/components/common/EmptyState"
@@ -7,14 +8,21 @@ import { LoadingState } from "@/components/common/LoadingState"
 import { PageHeader } from "@/components/common/PageHeader"
 import { FormCard } from "@/components/forms/FormCard"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { useAuth } from "@/hooks/useAuth"
 import { useForms } from "@/hooks/useForms"
 
 export function DashboardPage() {
   const { user } = useAuth()
   const { forms, isLoading, error, loadForms } = useForms()
-  const recentForms = forms.slice(0, 3)
+  const { draftCount, publishedCount, recentForms } = useMemo(
+    () => ({
+      draftCount: forms.filter((form) => !form.published).length,
+      publishedCount: forms.filter((form) => form.published).length,
+      recentForms: forms.slice(0, 3),
+    }),
+    [forms]
+  )
 
   return (
     <div className="grid gap-6">
@@ -31,45 +39,10 @@ export function DashboardPage() {
         }
       />
 
-      <div className="grid gap-4 sm:grid-cols-3">
-        <Card className="bg-background shadow-sm">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Total de formulários
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="flex items-center gap-3">
-            <FileText
-              className="size-5 text-muted-foreground"
-              aria-hidden="true"
-            />
-            <span className="text-3xl font-semibold">{forms.length}</span>
-          </CardContent>
-        </Card>
-        <Card className="bg-background shadow-sm">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Publicados
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <span className="text-3xl font-semibold">
-              {forms.filter((form) => form.published).length}
-            </span>
-          </CardContent>
-        </Card>
-        <Card className="bg-background shadow-sm">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Rascunhos
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <span className="text-3xl font-semibold">
-              {forms.filter((form) => !form.published).length}
-            </span>
-          </CardContent>
-        </Card>
+      <div className="grid gap-3 sm:grid-cols-3">
+        <MetricCard label="Total" value={forms.length} icon={<FileText />} />
+        <MetricCard label="Publicados" value={publishedCount} />
+        <MetricCard label="Rascunhos" value={draftCount} />
       </div>
 
       {isLoading ? <LoadingState label="Carregando formulários…" /> : null}
@@ -101,5 +74,31 @@ export function DashboardPage() {
         </section>
       ) : null}
     </div>
+  )
+}
+
+function MetricCard({
+  label,
+  value,
+  icon,
+}: {
+  label: string
+  value: number
+  icon?: ReactNode
+}) {
+  return (
+    <Card className="bg-card shadow-xs">
+      <CardContent className="flex items-center justify-between gap-4 p-4">
+        <div>
+          <p className="text-sm font-medium text-muted-foreground">{label}</p>
+          <p className="mt-1 text-3xl font-semibold tracking-tight">{value}</p>
+        </div>
+        {icon ? (
+          <div className="flex size-10 items-center justify-center rounded-full bg-accent text-accent-foreground [&_svg]:size-5">
+            {icon}
+          </div>
+        ) : null}
+      </CardContent>
+    </Card>
   )
 }
