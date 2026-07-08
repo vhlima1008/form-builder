@@ -33,6 +33,14 @@ export function Header() {
           >
             Formulários
           </NavLink>
+          <NavLink
+            to="/reports"
+            className={({ isActive }) =>
+              `rounded-md px-3 py-2 text-sm ${isActive ? "bg-muted" : "text-muted-foreground"}`
+            }
+          >
+            Relatórios
+          </NavLink>
         </nav>
         <div className="flex items-center gap-2">
           <Button asChild size="sm">

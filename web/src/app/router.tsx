@@ -12,6 +12,7 @@ import { FormResponseDetailsPage } from "@/pages/dashboard/FormResponseDetailsPa
 import { FormResponsesPage } from "@/pages/dashboard/FormResponsesPage"
 import { FormsPage } from "@/pages/dashboard/FormsPage"
 import { NewFormPage } from "@/pages/dashboard/NewFormPage"
+import { ReportsPage } from "@/pages/dashboard/ReportsPage"
 import { PublicFormPage } from "@/pages/public/PublicFormPage"
 import { PublicFormSubmittedPage } from "@/pages/public/PublicFormSubmittedPage"
 
@@ -38,6 +39,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/dashboard", element: <DashboardPage /> },
       { path: "/forms", element: <FormsPage /> },
+      { path: "/reports", element: <ReportsPage /> },
       { path: "/forms/new", element: <NewFormPage /> },
       { path: "/forms/:formId/builder", element: <FormBuilderPage /> },
       { path: "/forms/:formId/responses", element: <FormResponsesPage /> },

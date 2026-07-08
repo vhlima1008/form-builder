@@ -1,13 +1,8 @@
 package com.vhstudio.formsapi.controllers;
 
-import com.vhstudio.formsapi.services.FormService;
-import com.vhstudio.formsapi.utils.dtos.CreateFormRequest;
-import com.vhstudio.formsapi.utils.dtos.FormDetailsResponse;
-import com.vhstudio.formsapi.utils.dtos.FormResponseDTO;
-import com.vhstudio.formsapi.utils.dtos.UpdateFormRequest;
-import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.vhstudio.formsapi.services.FormService;
+import com.vhstudio.formsapi.utils.dtos.CreateFormRequest;
+import com.vhstudio.formsapi.utils.dtos.FormDetailsResponse;
+import com.vhstudio.formsapi.utils.dtos.FormResponseDTO;
+import com.vhstudio.formsapi.utils.dtos.UpdateFormRequest;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/forms")
@@ -37,6 +41,14 @@ public class FormController {
     @GetMapping
     public ResponseEntity<List<FormResponseDTO>> getUserForms() {
         return ResponseEntity.ok(formService.getUserForms());
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<FormResponseDTO>> searchForms(
+        @RequestParam(required = false, defaultValue = "") String title,
+        @RequestParam(required = false) Boolean published
+    ) {
+        return ResponseEntity.ok(formService.searchUserForms(title, published));
     }
 
     @GetMapping("/{formId}")

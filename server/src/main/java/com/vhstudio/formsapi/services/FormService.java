@@ -1,5 +1,13 @@
 package com.vhstudio.formsapi.services;
 
+import java.security.SecureRandom;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.vhstudio.formsapi.models.Form;
 import com.vhstudio.formsapi.models.User;
 import com.vhstudio.formsapi.repositories.FormRepository;
@@ -16,12 +24,6 @@ import com.vhstudio.formsapi.utils.dtos.UpdateFormRequest;
 import com.vhstudio.formsapi.utils.exceptions.BadRequestException;
 import com.vhstudio.formsapi.utils.exceptions.ForbiddenException;
 import com.vhstudio.formsapi.utils.exceptions.ResourceNotFoundException;
-import java.security.SecureRandom;
-import java.util.HexFormat;
-import java.util.List;
-import java.util.UUID;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class FormService {
@@ -72,6 +74,20 @@ public class FormService {
         return formRepository.findByOwnerId(currentUser.getId()).stream()
             .map(dtoMapper::toFormResponseDTO)
             .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<FormResponseDTO> searchUserForms(String title, Boolean published) {
+        User currentUser = authService.getCurrentUser();
+        String filterTitle = title == null ? "" : title;
+        List<Form> forms = published == null
+            ? formRepository.findByOwnerIdAndTitleContainingIgnoreCase(currentUser.getId(), filterTitle)
+            : formRepository.findByOwnerIdAndTitleContainingIgnoreCaseAndPublished(
+                currentUser.getId(),
+                filterTitle,
+                published
+            );
+        return forms.stream().map(dtoMapper::toFormResponseDTO).toList();
     }
 
     @Transactional(readOnly = true)
