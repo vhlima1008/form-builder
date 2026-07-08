@@ -1,0 +1,211 @@
+<svg viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg" font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="1200" height="720" fill="#ffffff"/>
+<text x="20" y="34" font-size="18" font-weight="bold" fill="#0b5394">Form Builder — Modelo Entidade-Relacionamento (Modelo Lógico)</text>
+<text x="20" y="52" font-size="11" fill="#334155">SGBD: MySQL 8.4 · 7 entidades · chaves primárias UUID · notação pé-de-galinha (crow’s foot)</text>
+<line x1="205" y1="125" x2="260" y2="125" stroke="#475569" stroke-width="1.6"/>
+<line x1="212" y1="119" x2="212" y2="131" stroke="#475569" stroke-width="1.6"/>
+<path d="M 247 125 L 260 118 M 247 125 L 260 125 M 247 125 L 260 132" stroke="#475569" stroke-width="1.6" fill="none"/>
+<rect x="209.5" y="116" width="46" height="16" rx="3" fill="#ffffff" stroke="#eef2f7"/><text x="232.5" y="127.5" font-size="9.5" fill="#334155" text-anchor="middle">possui</text>
+<line x1="445" y1="125" x2="500" y2="125" stroke="#475569" stroke-width="1.6"/>
+<line x1="452" y1="119" x2="452" y2="131" stroke="#475569" stroke-width="1.6"/>
+<path d="M 487 125 L 500 118 M 487 125 L 500 125 M 487 125 L 500 132" stroke="#475569" stroke-width="1.6" fill="none"/>
+<rect x="449.5" y="116" width="46" height="16" rx="3" fill="#ffffff" stroke="#eef2f7"/><text x="472.5" y="127.5" font-size="9.5" fill="#334155" text-anchor="middle">contém</text>
+<line x1="685" y1="125" x2="740" y2="125" stroke="#475569" stroke-width="1.6"/>
+<line x1="692" y1="119" x2="692" y2="131" stroke="#475569" stroke-width="1.6"/>
+<path d="M 727 125 L 740 118 M 727 125 L 740 125 M 727 125 L 740 132" stroke="#475569" stroke-width="1.6" fill="none"/>
+<rect x="689.5" y="116" width="46" height="16" rx="3" fill="#ffffff" stroke="#eef2f7"/><text x="712.5" y="127.5" font-size="9.5" fill="#334155" text-anchor="middle">contém</text>
+<line x1="925" y1="125" x2="980" y2="125" stroke="#475569" stroke-width="1.6"/>
+<line x1="932" y1="119" x2="932" y2="131" stroke="#475569" stroke-width="1.6"/>
+<path d="M 967 125 L 980 118 M 967 125 L 980 125 M 967 125 L 980 132" stroke="#475569" stroke-width="1.6" fill="none"/>
+<rect x="929.5" y="116" width="46" height="16" rx="3" fill="#ffffff" stroke="#eef2f7"/><text x="952.5" y="127.5" font-size="9.5" fill="#334155" text-anchor="middle">possui</text>
+<line x1="352.5" y1="266" x2="352.5" y2="460" stroke="#475569" stroke-width="1.6"/>
+<line x1="346.5" y1="273" x2="358.5" y2="273" stroke="#475569" stroke-width="1.6"/>
+<path d="M 352.5 447 L 345.5 460 M 352.5 447 L 352.5 460 M 352.5 447 L 359.5 460" stroke="#475569" stroke-width="1.6" fill="none"/>
+<rect x="329.5" y="351" width="46" height="16" rx="3" fill="#ffffff" stroke="#eef2f7"/><text x="352.5" y="362.5" font-size="9.5" fill="#334155" text-anchor="middle">recebe</text>
+<line x1="832.5" y1="244" x2="832.5" y2="460" stroke="#475569" stroke-width="1.6"/>
+<line x1="826.5" y1="251" x2="838.5" y2="251" stroke="#475569" stroke-width="1.6"/>
+<path d="M 832.5 447 L 825.5 460 M 832.5 447 L 832.5 460 M 832.5 447 L 839.5 460" stroke="#475569" stroke-width="1.6" fill="none"/>
+<rect x="782.5" y="346" width="100" height="16" rx="3" fill="#ffffff" stroke="#eef2f7"/><text x="832.5" y="357.5" font-size="9.5" fill="#334155" text-anchor="middle">é respondida em</text>
+<line x1="445" y1="520" x2="740" y2="520" stroke="#475569" stroke-width="1.6"/>
+<line x1="452" y1="514" x2="452" y2="526" stroke="#475569" stroke-width="1.6"/>
+<path d="M 727 520 L 740 513 M 727 520 L 740 520 M 727 520 L 740 527" stroke="#475569" stroke-width="1.6" fill="none"/>
+<rect x="569.5" y="511" width="46" height="16" rx="3" fill="#ffffff" stroke="#eef2f7"/><text x="592.5" y="522.5" font-size="9.5" fill="#334155" text-anchor="middle">contém</text>
+<rect x="20" y="60" width="185" height="140" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.3"/>
+<path d="M 20 74 Q 20 60 34 60 L 191 60 Q 205 60 205 74 L 205 90 L 20 90 Z" fill="#0b5394"/>
+<text x="112.5" y="80" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">users</text>
+<rect x="26" y="93.5" width="20" height="14" rx="3" fill="#d97706"/><text x="36" y="104.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">PK</text>
+<text x="51" y="104.5" font-size="10" font-weight="bold" fill="#0f172a" text-decoration="underline">id</text>
+<text x="197" y="104.5" font-size="9" fill="#64748b" text-anchor="end">UUID</text>
+<line x1="21" y1="112" x2="204" y2="112" stroke="#eef2f7" stroke-width="1"/>
+<text x="51" y="126.5" font-size="10" font-weight="normal" fill="#0f172a">name</text>
+<text x="197" y="126.5" font-size="9" fill="#64748b" text-anchor="end">VARCHAR</text>
+<line x1="21" y1="134" x2="204" y2="134" stroke="#eef2f7" stroke-width="1"/>
+<rect x="26" y="137.5" width="20" height="14" rx="3" fill="#059669"/><text x="36" y="148.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">U</text>
+<text x="51" y="148.5" font-size="10" font-weight="normal" fill="#0f172a">email</text>
+<text x="197" y="148.5" font-size="9" fill="#64748b" text-anchor="end">VARCHAR</text>
+<line x1="21" y1="156" x2="204" y2="156" stroke="#eef2f7" stroke-width="1"/>
+<text x="51" y="170.5" font-size="10" font-weight="normal" fill="#0f172a">password_hash</text>
+<text x="197" y="170.5" font-size="9" fill="#64748b" text-anchor="end">VARCHAR</text>
+<line x1="21" y1="178" x2="204" y2="178" stroke="#eef2f7" stroke-width="1"/>
+<text x="51" y="192.5" font-size="10" font-weight="normal" fill="#0f172a">created_at</text>
+<text x="197" y="192.5" font-size="9" fill="#64748b" text-anchor="end">DATETIME</text>
+<rect x="260" y="60" width="185" height="206" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.3"/>
+<path d="M 260 74 Q 260 60 274 60 L 431 60 Q 445 60 445 74 L 445 90 L 260 90 Z" fill="#0b5394"/>
+<text x="352.5" y="80" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">forms</text>
+<rect x="266" y="93.5" width="20" height="14" rx="3" fill="#d97706"/><text x="276" y="104.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">PK</text>
+<text x="291" y="104.5" font-size="10" font-weight="bold" fill="#0f172a" text-decoration="underline">id</text>
+<text x="437" y="104.5" font-size="9" fill="#64748b" text-anchor="end">UUID</text>
+<line x1="261" y1="112" x2="444" y2="112" stroke="#eef2f7" stroke-width="1"/>
+<rect x="266" y="115.5" width="20" height="14" rx="3" fill="#2563eb"/><text x="276" y="126.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">FK</text>
+<text x="291" y="126.5" font-size="10" font-weight="normal" fill="#2563eb">owner_id</text>
+<text x="437" y="126.5" font-size="9" fill="#64748b" text-anchor="end">UUID</text>
+<line x1="261" y1="134" x2="444" y2="134" stroke="#eef2f7" stroke-width="1"/>
+<text x="291" y="148.5" font-size="10" font-weight="normal" fill="#0f172a">title</text>
+<text x="437" y="148.5" font-size="9" fill="#64748b" text-anchor="end">VARCHAR</text>
+<line x1="261" y1="156" x2="444" y2="156" stroke="#eef2f7" stroke-width="1"/>
+<text x="291" y="170.5" font-size="10" font-weight="normal" fill="#0f172a">description</text>
+<text x="437" y="170.5" font-size="9" fill="#64748b" text-anchor="end">TEXT</text>
+<line x1="261" y1="178" x2="444" y2="178" stroke="#eef2f7" stroke-width="1"/>
+<text x="291" y="192.5" font-size="10" font-weight="normal" fill="#0f172a">published</text>
+<text x="437" y="192.5" font-size="9" fill="#64748b" text-anchor="end">BOOLEAN</text>
+<line x1="261" y1="200" x2="444" y2="200" stroke="#eef2f7" stroke-width="1"/>
+<rect x="266" y="203.5" width="20" height="14" rx="3" fill="#059669"/><text x="276" y="214.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">U</text>
+<text x="291" y="214.5" font-size="10" font-weight="normal" fill="#0f172a">public_slug</text>
+<text x="437" y="214.5" font-size="9" fill="#64748b" text-anchor="end">VARCHAR</text>
+<line x1="261" y1="222" x2="444" y2="222" stroke="#eef2f7" stroke-width="1"/>
+<text x="291" y="236.5" font-size="10" font-weight="normal" fill="#0f172a">created_at</text>
+<text x="437" y="236.5" font-size="9" fill="#64748b" text-anchor="end">DATETIME</text>
+<line x1="261" y1="244" x2="444" y2="244" stroke="#eef2f7" stroke-width="1"/>
+<text x="291" y="258.5" font-size="10" font-weight="normal" fill="#0f172a">updated_at</text>
+<text x="437" y="258.5" font-size="9" fill="#64748b" text-anchor="end">DATETIME</text>
+<rect x="500" y="60" width="185" height="140" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.3"/>
+<path d="M 500 74 Q 500 60 514 60 L 671 60 Q 685 60 685 74 L 685 90 L 500 90 Z" fill="#0b5394"/>
+<text x="592.5" y="80" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">sections</text>
+<rect x="506" y="93.5" width="20" height="14" rx="3" fill="#d97706"/><text x="516" y="104.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">PK</text>
+<text x="531" y="104.5" font-size="10" font-weight="bold" fill="#0f172a" text-decoration="underline">id</text>
+<text x="677" y="104.5" font-size="9" fill="#64748b" text-anchor="end">UUID</text>
+<line x1="501" y1="112" x2="684" y2="112" stroke="#eef2f7" stroke-width="1"/>
+<rect x="506" y="115.5" width="20" height="14" rx="3" fill="#2563eb"/><text x="516" y="126.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">FK</text>
+<text x="531" y="126.5" font-size="10" font-weight="normal" fill="#2563eb">form_id</text>
+<text x="677" y="126.5" font-size="9" fill="#64748b" text-anchor="end">UUID</text>
+<line x1="501" y1="134" x2="684" y2="134" stroke="#eef2f7" stroke-width="1"/>
+<text x="531" y="148.5" font-size="10" font-weight="normal" fill="#0f172a">title</text>
+<text x="677" y="148.5" font-size="9" fill="#64748b" text-anchor="end">VARCHAR</text>
+<line x1="501" y1="156" x2="684" y2="156" stroke="#eef2f7" stroke-width="1"/>
+<text x="531" y="170.5" font-size="10" font-weight="normal" fill="#0f172a">description</text>
+<text x="677" y="170.5" font-size="9" fill="#64748b" text-anchor="end">TEXT</text>
+<line x1="501" y1="178" x2="684" y2="178" stroke="#eef2f7" stroke-width="1"/>
+<text x="531" y="192.5" font-size="10" font-weight="normal" fill="#0f172a">position</text>
+<text x="677" y="192.5" font-size="9" fill="#64748b" text-anchor="end">INT</text>
+<rect x="740" y="60" width="185" height="184" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.3"/>
+<path d="M 740 74 Q 740 60 754 60 L 911 60 Q 925 60 925 74 L 925 90 L 740 90 Z" fill="#0b5394"/>
+<text x="832.5" y="80" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">questions</text>
+<rect x="746" y="93.5" width="20" height="14" rx="3" fill="#d97706"/><text x="756" y="104.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">PK</text>
+<text x="771" y="104.5" font-size="10" font-weight="bold" fill="#0f172a" text-decoration="underline">id</text>
+<text x="917" y="104.5" font-size="9" fill="#64748b" text-anchor="end">UUID</text>
+<line x1="741" y1="112" x2="924" y2="112" stroke="#eef2f7" stroke-width="1"/>
+<rect x="746" y="115.5" width="20" height="14" rx="3" fill="#2563eb"/><text x="756" y="126.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">FK</text>
+<text x="771" y="126.5" font-size="10" font-weight="normal" fill="#2563eb">section_id</text>
+<text x="917" y="126.5" font-size="9" fill="#64748b" text-anchor="end">UUID</text>
+<line x1="741" y1="134" x2="924" y2="134" stroke="#eef2f7" stroke-width="1"/>
+<text x="771" y="148.5" font-size="10" font-weight="normal" fill="#0f172a">title</text>
+<text x="917" y="148.5" font-size="9" fill="#64748b" text-anchor="end">VARCHAR</text>
+<line x1="741" y1="156" x2="924" y2="156" stroke="#eef2f7" stroke-width="1"/>
+<text x="771" y="170.5" font-size="10" font-weight="normal" fill="#0f172a">description</text>
+<text x="917" y="170.5" font-size="9" fill="#64748b" text-anchor="end">TEXT</text>
+<line x1="741" y1="178" x2="924" y2="178" stroke="#eef2f7" stroke-width="1"/>
+<text x="771" y="192.5" font-size="10" font-weight="normal" fill="#0f172a">type</text>
+<text x="917" y="192.5" font-size="9" fill="#64748b" text-anchor="end">ENUM</text>
+<line x1="741" y1="200" x2="924" y2="200" stroke="#eef2f7" stroke-width="1"/>
+<text x="771" y="214.5" font-size="10" font-weight="normal" fill="#0f172a">required</text>
+<text x="917" y="214.5" font-size="9" fill="#64748b" text-anchor="end">BOOLEAN</text>
+<line x1="741" y1="222" x2="924" y2="222" stroke="#eef2f7" stroke-width="1"/>
+<text x="771" y="236.5" font-size="10" font-weight="normal" fill="#0f172a">position</text>
+<text x="917" y="236.5" font-size="9" fill="#64748b" text-anchor="end">INT</text>
+<rect x="980" y="60" width="185" height="140" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.3"/>
+<path d="M 980 74 Q 980 60 994 60 L 1151 60 Q 1165 60 1165 74 L 1165 90 L 980 90 Z" fill="#0b5394"/>
+<text x="1072.5" y="80" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">question_options</text>
+<rect x="986" y="93.5" width="20" height="14" rx="3" fill="#d97706"/><text x="996" y="104.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">PK</text>
+<text x="1011" y="104.5" font-size="10" font-weight="bold" fill="#0f172a" text-decoration="underline">id</text>
+<text x="1157" y="104.5" font-size="9" fill="#64748b" text-anchor="end">UUID</text>
+<line x1="981" y1="112" x2="1164" y2="112" stroke="#eef2f7" stroke-width="1"/>
+<rect x="986" y="115.5" width="20" height="14" rx="3" fill="#2563eb"/><text x="996" y="126.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">FK</text>
+<text x="1011" y="126.5" font-size="10" font-weight="normal" fill="#2563eb">question_id</text>
+<text x="1157" y="126.5" font-size="9" fill="#64748b" text-anchor="end">UUID</text>
+<line x1="981" y1="134" x2="1164" y2="134" stroke="#eef2f7" stroke-width="1"/>
+<text x="1011" y="148.5" font-size="10" font-weight="normal" fill="#0f172a">label</text>
+<text x="1157" y="148.5" font-size="9" fill="#64748b" text-anchor="end">VARCHAR</text>
+<line x1="981" y1="156" x2="1164" y2="156" stroke="#eef2f7" stroke-width="1"/>
+<text x="1011" y="170.5" font-size="10" font-weight="normal" fill="#0f172a">option_value</text>
+<text x="1157" y="170.5" font-size="9" fill="#64748b" text-anchor="end">VARCHAR</text>
+<line x1="981" y1="178" x2="1164" y2="178" stroke="#eef2f7" stroke-width="1"/>
+<text x="1011" y="192.5" font-size="10" font-weight="normal" fill="#0f172a">position</text>
+<text x="1157" y="192.5" font-size="9" fill="#64748b" text-anchor="end">INT</text>
+<rect x="260" y="460" width="185" height="228" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.3"/>
+<path d="M 260 474 Q 260 460 274 460 L 431 460 Q 445 460 445 474 L 445 490 L 260 490 Z" fill="#0b5394"/>
+<text x="352.5" y="480" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">form_responses</text>
+<rect x="266" y="493.5" width="20" height="14" rx="3" fill="#d97706"/><text x="276" y="504.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">PK</text>
+<text x="291" y="504.5" font-size="10" font-weight="bold" fill="#0f172a" text-decoration="underline">id</text>
+<text x="437" y="504.5" font-size="9" fill="#64748b" text-anchor="end">UUID</text>
+<line x1="261" y1="512" x2="444" y2="512" stroke="#eef2f7" stroke-width="1"/>
+<rect x="266" y="515.5" width="20" height="14" rx="3" fill="#2563eb"/><text x="276" y="526.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">FK</text>
+<text x="291" y="526.5" font-size="10" font-weight="normal" fill="#2563eb">form_id</text>
+<text x="437" y="526.5" font-size="9" fill="#64748b" text-anchor="end">UUID</text>
+<line x1="261" y1="534" x2="444" y2="534" stroke="#eef2f7" stroke-width="1"/>
+<text x="291" y="548.5" font-size="10" font-weight="normal" fill="#0f172a">respondent_name</text>
+<text x="437" y="548.5" font-size="9" fill="#64748b" text-anchor="end">VARCHAR</text>
+<line x1="261" y1="556" x2="444" y2="556" stroke="#eef2f7" stroke-width="1"/>
+<text x="291" y="570.5" font-size="10" font-weight="normal" fill="#0f172a">respondent_email</text>
+<text x="437" y="570.5" font-size="9" fill="#64748b" text-anchor="end">VARCHAR</text>
+<line x1="261" y1="578" x2="444" y2="578" stroke="#eef2f7" stroke-width="1"/>
+<text x="291" y="592.5" font-size="10" font-weight="normal" fill="#0f172a">status</text>
+<text x="437" y="592.5" font-size="9" fill="#64748b" text-anchor="end">ENUM</text>
+<line x1="261" y1="600" x2="444" y2="600" stroke="#eef2f7" stroke-width="1"/>
+<rect x="266" y="603.5" width="20" height="14" rx="3" fill="#059669"/><text x="276" y="614.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">U</text>
+<text x="291" y="614.5" font-size="10" font-weight="normal" fill="#0f172a">access_token</text>
+<text x="437" y="614.5" font-size="9" fill="#64748b" text-anchor="end">VARCHAR</text>
+<line x1="261" y1="622" x2="444" y2="622" stroke="#eef2f7" stroke-width="1"/>
+<text x="291" y="636.5" font-size="10" font-weight="normal" fill="#0f172a">created_at</text>
+<text x="437" y="636.5" font-size="9" fill="#64748b" text-anchor="end">DATETIME</text>
+<line x1="261" y1="644" x2="444" y2="644" stroke="#eef2f7" stroke-width="1"/>
+<text x="291" y="658.5" font-size="10" font-weight="normal" fill="#0f172a">started_at</text>
+<text x="437" y="658.5" font-size="9" fill="#64748b" text-anchor="end">DATETIME</text>
+<line x1="261" y1="666" x2="444" y2="666" stroke="#eef2f7" stroke-width="1"/>
+<text x="291" y="680.5" font-size="10" font-weight="normal" fill="#0f172a">finished_at</text>
+<text x="437" y="680.5" font-size="9" fill="#64748b" text-anchor="end">DATETIME</text>
+<rect x="740" y="460" width="185" height="140" rx="7" fill="#ffffff" stroke="#94a3b8" stroke-width="1.3"/>
+<path d="M 740 474 Q 740 460 754 460 L 911 460 Q 925 460 925 474 L 925 490 L 740 490 Z" fill="#b45309"/>
+<text x="832.5" y="480" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">question_answers  (associativa)</text>
+<rect x="746" y="493.5" width="20" height="14" rx="3" fill="#d97706"/><text x="756" y="504.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">PK</text>
+<text x="771" y="504.5" font-size="10" font-weight="bold" fill="#0f172a" text-decoration="underline">id</text>
+<text x="917" y="504.5" font-size="9" fill="#64748b" text-anchor="end">UUID</text>
+<line x1="741" y1="512" x2="924" y2="512" stroke="#eef2f7" stroke-width="1"/>
+<rect x="746" y="515.5" width="20" height="14" rx="3" fill="#2563eb"/><text x="756" y="526.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">FK</text>
+<text x="771" y="526.5" font-size="10" font-weight="normal" fill="#2563eb">form_response_id</text>
+<text x="917" y="526.5" font-size="9" fill="#64748b" text-anchor="end">UUID</text>
+<line x1="741" y1="534" x2="924" y2="534" stroke="#eef2f7" stroke-width="1"/>
+<rect x="746" y="537.5" width="20" height="14" rx="3" fill="#2563eb"/><text x="756" y="548.0" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">FK</text>
+<text x="771" y="548.5" font-size="10" font-weight="normal" fill="#2563eb">question_id</text>
+<text x="917" y="548.5" font-size="9" fill="#64748b" text-anchor="end">UUID</text>
+<line x1="741" y1="556" x2="924" y2="556" stroke="#eef2f7" stroke-width="1"/>
+<text x="771" y="570.5" font-size="10" font-weight="normal" fill="#0f172a">answer_value</text>
+<text x="917" y="570.5" font-size="9" fill="#64748b" text-anchor="end">TEXT</text>
+<line x1="741" y1="578" x2="924" y2="578" stroke="#eef2f7" stroke-width="1"/>
+<text x="771" y="592.5" font-size="10" font-weight="normal" fill="#0f172a">created_at</text>
+<text x="917" y="592.5" font-size="9" fill="#64748b" text-anchor="end">DATETIME</text>
+<rect x="20" y="475" width="210" height="170" rx="7" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+<text x="32" y="497" font-size="11" font-weight="bold" fill="#0b5394">Legenda</text>
+<rect x="34" y="510" width="20" height="14" rx="3" fill="#d97706"/><text x="44" y="520.5" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">PK</text>
+<text x="62" y="524" font-size="9.5" fill="#334155">Chave primária (UUID)</text>
+<rect x="34" y="534" width="20" height="14" rx="3" fill="#2563eb"/><text x="44" y="544.5" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">FK</text>
+<text x="62" y="548" font-size="9.5" fill="#334155">Chave estrangeira</text>
+<rect x="34" y="558" width="20" height="14" rx="3" fill="#059669"/><text x="44" y="568.5" font-size="8.5" font-weight="bold" fill="#fff" text-anchor="middle">U</text>
+<text x="62" y="572" font-size="9.5" fill="#334155">Restrição UNIQUE (índice)</text>
+<text x="32" y="599" font-size="9.5" fill="#334155">Cardinalidade</text>
+<line x1="118" y1="595" x2="160" y2="595" stroke="#475569" stroke-width="1.6"/>
+<line x1="123" y1="589" x2="123" y2="601" stroke="#475569" stroke-width="1.6"/>
+<path d="M 147 595 L 160 588 M 147 595 L 160 595 M 147 595 L 160 602" stroke="#475569" stroke-width="1.6" fill="none"/>
+<text x="166" y="598" font-size="9.5" fill="#334155">1 : N</text>
+<text x="32" y="623" font-size="8.7" fill="#64748b">Amarelo = entidade associativa</text>
+<text x="32" y="637" font-size="8.7" fill="#64748b">(resolve o N:N respostas–perguntas)</text>
+</svg>
