@@ -116,6 +116,26 @@ Contribuições são muito bem-vendas, principalmente bug-fixes, casos de uso ou
 
 ---
 
+## Modelo de Dados (MER)
+
+O diagrama abaixo representa o modelo lógico do banco de dados (MySQL 8.4), com as sete entidades do domínio, suas chaves e cardinalidades.
+
+![Diagrama MER do Form Builder](docs/MER-Form-Builder.png)
+
+O modelo é composto por sete entidades, todas com chave primária `UUID`:
+
+| Entidade | Descrição | Relacionamentos |
+|---|---|---|
+| **users** | Usuário autenticado, dono dos formulários | 1—N com `forms` |
+| **forms** | Formulário criado por um usuário | N—1 `users` · 1—N `sections` |
+| **sections** | Seção ordenável dentro de um formulário | N—1 `forms` · 1—N `questions` |
+| **questions** | Pergunta de uma seção, com tipo e posição | N—1 `sections` · 1—N `question_options` |
+| **question_options** | Opção de resposta (checkbox/seleção) | N—1 `questions` |
+| **form_responses** | Uma resposta enviada a um formulário | N—1 `forms` · 1—N `question_answers` |
+| **question_answers** | Resposta a uma pergunta específica (entidade associativa) | N—1 `form_responses` · N—1 `questions` |
+
+> A entidade **`question_answers`** é uma tabela associativa que resolve o relacionamento N:N entre `form_responses` e `questions`: uma resposta cobre várias perguntas, e cada pergunta é respondida em várias respostas.
+
 ## Licença
 
 Este projeto está regido pela **Licença MIT**. Veja a [licença](LICENSE).
