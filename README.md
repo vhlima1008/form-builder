@@ -7,7 +7,7 @@
 <p align="center">
   <img alt="Language" src="https://img.shields.io/badge/language-Java-yellow" />
   <img alt="Language" src="https://img.shields.io/badge/language-TypeScript-blue" />
-  <img alt="License" src="https://img.shields.io/github/license/vhlima1008/form-builder" />
+  <img alt="GitHub License" src="https://img.shields.io/github/license/vhlima1008/form-builder">
   <img alt="Last commit" src="https://img.shields.io/github/last-commit/vhlima1008/form-builder" />
   <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/vhlima1008/form-builder">
 </p>
